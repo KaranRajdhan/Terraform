@@ -1,0 +1,40 @@
+[karan@oci-lz-vm ~]$ cat main.tf
+module "InternetGateway" {
+
+  source         = "/home/karan/igw"
+  for_each       = var.ig_gateway_config
+  compartment_id = each.value.compartment_id
+  display_name   = each.value.display_name
+  vcn_id         = each.value.vcn_id
+
+}
+
+[karan@oci-lz-vm ~]$ cat variable.tf
+variable "ig_gateway_config" {
+  description = "List of IG configurations"
+  type = map(object({
+    compartment_id = string
+    display_name   = string
+    vcn_id         = string
+  }))
+}
+
+[karan@oci-lz-vm ~]$ cat terraform.tfvars
+tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaavq7mli6vqbhibwzbkywghhu7v233cjudlejd5jgyqwsdsuen77ba"
+user_ocid        = "ocid1.user.oc1..aaaaaaaa2tgse5esmja76qwbgylp6xq47foldhcwqdfmg3sh3sfbju3ouvnq"
+private_key_path = "/home/karan/api_keys/private_key"
+fingerprint      = "d2:a1:0b:b2:b5:1a:82:8f:5d:33:a3:65:66:8d:35:94"
+region           = "us-ashburn-1"
+ig_gateway_config = {
+  igw1 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "IG1"
+    vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaxvowp3ialneejhsw7ywlwgimw7igqep76omynmacmygj35ck2g3q"
+  },
+  igw2 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "IG2"
+    vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaxvowp3iacbzm4y4ep2s54o6saqddhwqzfwy6g6py2ddgclozn25a"
+  }
+}
+[karan@oci-lz-vm ~]$
