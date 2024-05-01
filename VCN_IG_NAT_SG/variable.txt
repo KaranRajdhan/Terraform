@@ -1,0 +1,44 @@
+[karan@oci-lz-vm ~]$ cat variable.tf
+variable "ig_gateway_config" {
+  description = "List of IG configurations"
+  type = map(object({
+    compartment_id = string
+    display_name   = string
+    vcn_key        = string
+  }))
+}
+
+
+variable "nat_gateway_config" {
+  description = "List of NAT Gateway configurations"
+  type = map(object({
+    compartment_id = string
+    display_name   = string
+    vcn_key        = string
+  }))
+}
+
+
+variable "service_gateway_config" {
+  description = "List of Service Gateway configurations"
+  type = map(object({
+    compartment_id = string
+    display_name   = string
+    vcn_key        = string
+  }))
+}
+
+
+
+
+
+
+variable "vcn_config" {
+  description = "List of VCN configurations"
+  type = map(object({
+    compartment_id = string
+    display_name   = string
+    cidr_block     = string
+  }))
+}
+

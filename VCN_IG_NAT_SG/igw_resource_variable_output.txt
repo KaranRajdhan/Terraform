@@ -1,0 +1,32 @@
+[karan@oci-lz-vm ~]$ cd igw
+[karan@oci-lz-vm igw]$ ls
+igw_resource.tf  output.tf  variable.tf
+[karan@oci-lz-vm igw]$ cat igw_resource.tf
+# Internet Gateway
+resource "oci_core_internet_gateway" "igw" {
+  compartment_id = var.compartment_id
+  display_name   = var.display_name
+  vcn_id         = var.vcn_id
+}
+
+[karan@oci-lz-vm igw]$ cat output.tf
+output "internet_gateway_id" {
+  description = "id of internet gateway if it is created"
+  value       = oci_core_internet_gateway.igw.id
+}
+
+[karan@oci-lz-vm igw]$ cat variable.tf
+variable "compartment_id" {
+  description = "My internet gateway"
+  type        = string
+}
+
+variable "vcn_id" {
+  description = "My internet gateway"
+  type        = string
+}
+
+variable "display_name" {
+  description = "My internet gateway"
+  type        = string
+}

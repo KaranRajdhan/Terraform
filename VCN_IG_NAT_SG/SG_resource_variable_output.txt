@@ -1,0 +1,37 @@
+[karan@oci-lz-vm SG]$ cat output.tf
+output "service_gateway_id" {
+  description = "id of service gateway if it is created"
+  value       = oci_core_service_gateway.SG.id
+}
+
+[karan@oci-lz-vm SG]$ cat SG_resource.tf
+# Service Gateway
+
+resource "oci_core_service_gateway" "SG" {
+    compartment_id = var.compartment_id
+    display_name = var.display_name
+    services {
+        service_id = data.oci_core_services.services.services.0.id
+    }
+    vcn_id = var.vcn_id
+}
+[karan@oci-lz-vm SG]$ cat variable.tf
+variable "compartment_id" {
+  description = "My service gateway"
+  type        = string
+}
+
+variable "display_name" {
+  description = "My service gateway"
+  type        = string
+}
+
+
+variable "vcn_id" {
+  description = "My service gateway"
+  type        = string
+}
+
+[karan@oci-lz-vm SG]$ cat data_source.tf
+data "oci_core_services" "services" {
+}

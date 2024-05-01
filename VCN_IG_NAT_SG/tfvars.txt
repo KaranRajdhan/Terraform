@@ -1,0 +1,72 @@
+[karan@oci-lz-vm ~]$ cat terraform.tfvars
+tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaavq7mli6vqbhibwzbkywghhu7v233cjudlejd5jgyqwsdsuen77ba"
+user_ocid        = "ocid1.user.oc1..aaaaaaaa2tgse5esmja76qwbgylp6xq47foldhcwqdfmg3sh3sfbju3ouvnq"
+private_key_path = "/home/karan/api_keys/private_key"
+fingerprint      = "d2:a1:0b:b2:b5:1a:82:8f:5d:33:a3:65:66:8d:35:94"
+region           = "us-ashburn-1"
+
+vcn_config = {
+  vcn1 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "Karan_VCN1"
+    cidr_block     = "10.0.0.0/16"
+  },
+
+  vcn2 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "Karan_VCN2"
+    cidr_block     = "10.1.0.0/24"
+  }
+}
+
+
+
+ig_gateway_config = {
+  igw1 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "IG1"
+    vcn_key        = "vcn1"
+  },
+  igw2 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "IG2"
+    vcn_key        = "vcn2"
+  }
+}
+
+
+
+nat_gateway_config = {
+  nat_gw1 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "nat_gw1"
+    vcn_key        = "vcn1"
+  },
+
+  nat_gw2 = {
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    display_name   = "nat_gw2"
+    vcn_key        = "vcn2"
+  }
+}
+
+
+service_gateway_config = {
+  SG1 = {
+    display_name   = "SG1"
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    vcn_key        = "vcn1"
+  },
+
+  SG2 = {
+    display_name   = "SG2"
+    compartment_id = "ocid1.compartment.oc1..aaaaaaaagjdlwxrxbfqh5nez4u7oujzg72dbbaogyzgi3ajhmebfscycnw7q"
+    vcn_key        = "vcn2"
+  }
+}
+
+
+
+
+
+

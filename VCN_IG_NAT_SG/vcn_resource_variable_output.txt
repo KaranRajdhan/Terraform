@@ -1,0 +1,31 @@
+[karan@oci-lz-vm ~]$ cd vcn
+[karan@oci-lz-vm vcn]$ ls
+output.tf  variable.tf  vcn_resource.tf
+[karan@oci-lz-vm vcn]$ cat output.tf
+output "vcn_id" {
+  description = "id of vcn if it is created"
+  value       = oci_core_vcn.karan_vcn.id
+}
+
+[karan@oci-lz-vm vcn]$ cat variable.tf
+variable "compartment_id" {
+  description = "My VCN"
+  type        = string
+}
+
+variable "display_name" {
+  description = "My VCN"
+  type        = string
+}
+
+variable "cidr_block" {
+  description = "My VCN"
+  type        = string
+}
+[karan@oci-lz-vm vcn]$ cat vcn_resource.tf
+# VCN
+resource "oci_core_vcn" "karan_vcn" {
+  compartment_id = var.compartment_id
+  display_name   = var.display_name
+  cidr_block     = var.cidr_block
+}

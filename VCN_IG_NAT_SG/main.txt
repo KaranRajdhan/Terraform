@@ -1,0 +1,45 @@
+[karan@oci-lz-vm ~]$ cat main.tf
+
+module "VCN" {
+
+  source         = "/home/karan/vcn"
+  for_each       = var.vcn_config
+  compartment_id = each.value.compartment_id
+  display_name   = each.value.display_name
+  cidr_block     = each.value.cidr_block
+}
+
+
+module "InternetGateway" {
+
+  source         = "/home/karan/igw"
+  for_each       = var.ig_gateway_config
+  compartment_id = each.value.compartment_id
+  display_name   = each.value.display_name
+  vcn_id         = module.VCN[each.value.vcn_key].vcn_id
+
+}
+
+module "NATGateway" {
+
+  source         = "/home/karan/nat_gw"
+  for_each       = var.nat_gateway_config
+  compartment_id = each.value.compartment_id
+  display_name   = each.value.display_name
+  vcn_id         = module.VCN[each.value.vcn_key].vcn_id
+
+}
+
+
+module "ServiceGateway" {
+
+  source         = "/home/karan/SG"
+  for_each       = var.service_gateway_config
+  compartment_id = each.value.compartment_id
+  display_name   = each.value.display_name
+  vcn_id         = module.VCN[each.value.vcn_key].vcn_id
+
+
+}
+
+
